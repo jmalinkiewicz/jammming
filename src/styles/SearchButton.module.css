@@ -1,0 +1,17 @@
+.search {
+  display: block;
+  margin: 15px auto;
+  width: 15vw;
+  height: 60px;
+  border-radius: 20px;
+  background-color: #beb7df;
+  transition: background-color 0.1s;
+  border: 0;
+  font-size: 32px;
+  color: white;
+}
+
+.search:hover {
+  background-color: #9b95b6;
+  cursor: pointer;
+}
