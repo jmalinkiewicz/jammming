@@ -5,7 +5,7 @@ import SearchButton from "../components/SearchButton";
 import SearchResults from "../components/SearchResults";
 import Playlist from "../components/Playlist";
 
-export default function Main() {
+export default function Main(props) {
   return (
     <>
       <div className={styles.headContainer}>
@@ -15,8 +15,18 @@ export default function Main() {
         </form>
       </div>
       <div className={styles.tracksContainer}>
-        <SearchResults />
-        <Playlist />
+        <SearchResults
+          results={props.tracks}
+          addToPlaylist={props.addToPlaylist}
+        />
+        <Playlist
+          playlist={props.playlist}
+          removeFromPlaylist={props.removeFromPlaylist}
+          playlistTitle={props.playlistTitle}
+          renamePlaylist={props.renamePlaylist}
+          setTracksUri={props.setTracksUri}
+          setPlaylist={props.setPlaylist}
+        />
       </div>
     </>
   );

@@ -5,6 +5,19 @@
   border-radius: 15px;
 }
 
+.button {
+  display: inline-block;
+  text-align: right;
+  width: 10%;
+  font-size: 32px;
+}
+
+.info {
+  display: inline-block;
+  width: 90%;
+}
+
 p {
   margin: 10px;
+  display: inline-block;
 }
