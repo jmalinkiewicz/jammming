@@ -1,6 +1,6 @@
 import React from "react";
-import Tracklist from "./Tracklist";
-import styles from "../styles/SearchResults.module.css";
+import Tracklist from "../Tracklist/Tracklist";
+import styles from "./SearchResults.module.css";
 
 export default function SearchResults(props) {
   return (

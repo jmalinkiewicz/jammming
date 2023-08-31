@@ -1,6 +1,6 @@
 import React from "react";
-import Track from "./Track";
-import styles from "../styles/Tracklist.module.css";
+import Track from "../Track/Track";
+import styles from "./Tracklist.module.css";
 
 export default function Tracklist(props) {
   return (
@@ -14,6 +14,7 @@ export default function Tracklist(props) {
           uri={track.uri}
           action={props.addToPlaylist}
           symbol="+"
+          key={track.id}
         />
       ))}
     </div>

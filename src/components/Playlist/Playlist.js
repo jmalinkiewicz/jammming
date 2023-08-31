@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "../styles/Playlist.module.css";
-import Track from "./Track";
+import styles from "./Playlist.module.css";
+import Track from "../Track/Track";
 
 export default function Playlist(props) {
   function handleChange(e) {
@@ -31,6 +31,7 @@ export default function Playlist(props) {
           id={track.id}
           symbol="-"
           action={props.removeFromPlaylist}
+          key={track.id}
         />
       ))}
       <input

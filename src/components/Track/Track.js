@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/Track.module.css";
+import styles from "./Track.module.css";
 
 export default function Track(props) {
   function handleClick() {

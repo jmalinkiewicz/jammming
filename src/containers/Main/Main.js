@@ -1,9 +1,9 @@
 import React from "react";
-import SearchBar from "../components/SearchBar";
-import styles from "../styles/Main.module.css";
-import SearchButton from "../components/SearchButton";
-import SearchResults from "../components/SearchResults";
-import Playlist from "../components/Playlist";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import styles from "./Main.module.css";
+import SearchButton from "../../components/SearchButton/SearchButton";
+import SearchResults from "../../components/SearchResults/SearchResults";
+import Playlist from "../../components/Playlist/Playlist";
 
 export default function Main(props) {
   return (

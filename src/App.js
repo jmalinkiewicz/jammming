@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./App.css";
-import Header from "./containers/Header";
-import Main from "./containers/Main";
+import Header from "./containers/Header/Header";
+import Main from "./containers/Main/Main";
+import Spotify from "./util/spotifyApi";
 
 function App() {
   const [tracks, setTracks] = useState([
@@ -70,6 +71,7 @@ function App() {
 
   return (
     <>
+      <h1 onClick={Spotify.getAccessToken}>XDDDDDDDDDD</h1>
       <Header />
       <Main
         setPlaylist={setPlaylist}
