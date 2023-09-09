@@ -4,9 +4,9 @@ import styles from "./Track.module.css";
 export default function Track(props) {
   function handleClick() {
     if (props.symbol === "+") {
-      props.action(props.title, props.author, props.album, props.id, props.uri);
+      props.action(props.title, props.artist, props.album, props.uri);
     } else {
-      props.action(props.id);
+      props.action(props.uri);
     }
   }
 
@@ -14,7 +14,7 @@ export default function Track(props) {
     <div className={styles.track}>
       <div className={styles.info}>
         <p>
-          {props.title} - {props.author}
+          {props.title} - {props.artist}
         </p>
         <p>{props.album}</p>
       </div>

@@ -18,7 +18,7 @@
   width: 100%;
 }
 
-.author {
+.button {
   font-size: 24px;
   color: white;
   padding: 5px;
@@ -26,8 +26,9 @@
   border-radius: 5px;
   transition: background-color 0.1s;
   text-decoration: none;
+  border: 0;
 }
 
-.author:hover {
+.button:hover {
   background-color: #9b95b6;
 }

@@ -9,8 +9,6 @@ export default function Playlist(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const URIs = props.playlist.map((track) => track.uri);
-    props.setTracksUri(URIs);
     props.setPlaylist([]);
   }
 
@@ -26,12 +24,12 @@ export default function Playlist(props) {
       {props.playlist.map((track) => (
         <Track
           title={track.title}
-          author={track.author}
+          artist={track.artist}
           album={track.album}
-          id={track.id}
           symbol="-"
           action={props.removeFromPlaylist}
-          key={track.id}
+          key={track.uri}
+          uri={track.uri}
         />
       ))}
       <input

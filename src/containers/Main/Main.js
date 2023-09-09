@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import styles from "./Main.module.css";
 import SearchButton from "../../components/SearchButton/SearchButton";
@@ -6,11 +6,18 @@ import SearchResults from "../../components/SearchResults/SearchResults";
 import Playlist from "../../components/Playlist/Playlist";
 
 export default function Main(props) {
+  const [term, setTerm] = useState("");
+
+  function handleSubmit(event) {
+    props.search(term);
+    event.preventDefault();
+  }
+
   return (
     <>
       <div className={styles.headContainer}>
-        <form>
-          <SearchBar />
+        <form onSubmit={handleSubmit}>
+          <SearchBar term={term} setTerm={setTerm} />
           <SearchButton />
         </form>
       </div>
@@ -24,7 +31,6 @@ export default function Main(props) {
           removeFromPlaylist={props.removeFromPlaylist}
           playlistTitle={props.playlistTitle}
           renamePlaylist={props.renamePlaylist}
-          setTracksUri={props.setTracksUri}
           setPlaylist={props.setPlaylist}
         />
       </div>
