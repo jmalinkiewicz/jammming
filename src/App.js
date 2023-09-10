@@ -6,11 +6,15 @@ import Spotify from "./util/spotifyApi";
 
 function App() {
   const [tracks, setTracks] = useState([]);
-
   const [playlist, setPlaylist] = useState([]);
   const [playlistTitle, setPlaylistTitle] = useState("");
 
   function addToPlaylist(trackTitle, trackArtist, trackAlbum, trackUri) {
+    if (playlist.some((track) => track.uri === trackUri)) {
+      window.alert("Song already added to the playlist.");
+      return;
+    }
+
     setPlaylist((prev) => [
       {
         title: trackTitle,
@@ -32,15 +36,22 @@ function App() {
   }
 
   async function search(term) {
-    const newTracks = await Spotify.search(term);
-    console.log(newTracks);
+    if (term) {
+      const newTracks = await Spotify.search(term);
+      console.log(newTracks);
 
-    setTracks(newTracks);
+      setTracks(newTracks);
+    }
+  }
+
+  async function createNewPlaylist() {
+    const userProfile = await Spotify.getCurrentUserProfile();
+    Spotify.createPlaylist("TESTOWA 1");
   }
 
   return (
     <>
-      <h1 onClick={search}>TEST FETCH</h1>
+      <h1 onClick={createNewPlaylist}>TESTOWA PLAYLISTA</h1>
       <Header />
       <Main
         search={search}

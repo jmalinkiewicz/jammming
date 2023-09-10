@@ -4,6 +4,7 @@ import styles from "./Main.module.css";
 import SearchButton from "../../components/SearchButton/SearchButton";
 import SearchResults from "../../components/SearchResults/SearchResults";
 import Playlist from "../../components/Playlist/Playlist";
+import Spotify from "../../util/spotifyApi";
 
 export default function Main(props) {
   const [term, setTerm] = useState("");

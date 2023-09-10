@@ -1,6 +1,7 @@
 const clientId = "f1956d7d138743f4877774cd722b7be4"; // Insert client ID here.
 const redirectUri = "http://localhost:3000/callback"; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
 let accessToken;
+let userProfile;
 
 const Spotify = {
   getAccessToken() {
@@ -19,12 +20,29 @@ const Spotify = {
       window.history.pushState("Access Token", null, "/");
       return accessToken;
     } else {
-      const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+      const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-private%20playlist-modify-public%20user-read-private%20user-read-email&redirect_uri=${redirectUri}`;
       window.location = accessUrl;
     }
   },
 
+  async getCurrentUserProfile() {
+    const urlToFetch = "https://api.spotify.com/v1/me";
+
+    const response = await fetch(urlToFetch, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const jsonResponse = await response.json();
+    userProfile = jsonResponse;
+    return jsonResponse;
+  },
+
   async search(keyword) {
+    if (!accessToken) {
+      this.getAccessToken();
+    }
+
     const urlToFetch = `https://api.spotify.com/v1/search?q=${keyword}&type=track`;
 
     const response = await fetch(urlToFetch, {
@@ -45,6 +63,38 @@ const Spotify = {
     });
 
     return tracks;
+  },
+
+  async createPlaylist(title, contents) {
+    const urlToCreate = `https://api.spotify.com/v1/users/${userProfile.id}/playlists`;
+    const urlToPopulate = `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`;
+
+    const responsePlaylist = await fetch(urlToCreate, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: title,
+        description: "Playlist created using JAMMMING",
+        public: false,
+      }),
+    });
+
+    const playlist = responsePlaylist.json();
+
+    const responsePopulatePlaylist = await fetch(urlToPopulate, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        uris: contents,
+        position: 0,
+      }),
+    });
   },
 };
 
