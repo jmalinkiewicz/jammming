@@ -28,6 +28,7 @@ export default function Main(props) {
           addToPlaylist={props.addToPlaylist}
         />
         <Playlist
+          createNewPlaylist={props.createNewPlaylist}
           playlist={props.playlist}
           removeFromPlaylist={props.removeFromPlaylist}
           playlistTitle={props.playlistTitle}

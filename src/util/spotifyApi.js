@@ -67,7 +67,6 @@ const Spotify = {
 
   async createPlaylist(title, contents) {
     const urlToCreate = `https://api.spotify.com/v1/users/${userProfile.id}/playlists`;
-    const urlToPopulate = `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`;
 
     const responsePlaylist = await fetch(urlToCreate, {
       method: "POST",
@@ -82,7 +81,8 @@ const Spotify = {
       }),
     });
 
-    const playlist = responsePlaylist.json();
+    const playlist = await responsePlaylist.json();
+    const urlToPopulate = `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`;
 
     const responsePopulatePlaylist = await fetch(urlToPopulate, {
       method: "POST",

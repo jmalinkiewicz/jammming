@@ -7,7 +7,6 @@ import Spotify from "./util/spotifyApi";
 function App() {
   const [tracks, setTracks] = useState([]);
   const [playlist, setPlaylist] = useState([]);
-  const [playlistTitle, setPlaylistTitle] = useState("");
 
   function addToPlaylist(trackTitle, trackArtist, trackAlbum, trackUri) {
     if (playlist.some((track) => track.uri === trackUri)) {
@@ -31,37 +30,30 @@ function App() {
     setPlaylist((prev) => prev.filter((track) => track.uri !== trackUri));
   }
 
-  function renamePlaylist(name) {
-    setPlaylistTitle(name);
-  }
-
   async function search(term) {
     if (term) {
       const newTracks = await Spotify.search(term);
       console.log(newTracks);
-
       setTracks(newTracks);
     }
   }
 
-  async function createNewPlaylist() {
+  async function createNewPlaylist(title, contents) {
     const userProfile = await Spotify.getCurrentUserProfile();
-    Spotify.createPlaylist("TESTOWA 1");
+    Spotify.createPlaylist(title, contents);
   }
 
   return (
     <>
-      <h1 onClick={createNewPlaylist}>TESTOWA PLAYLISTA</h1>
       <Header />
       <Main
+        createNewPlaylist={createNewPlaylist}
         search={search}
         setPlaylist={setPlaylist}
         tracks={tracks}
         playlist={playlist}
         addToPlaylist={addToPlaylist}
         removeFromPlaylist={removeFromPlaylist}
-        playlistTitle={playlistTitle}
-        renamePlaylist={renamePlaylist}
       />
     </>
   );
